@@ -109,12 +109,25 @@ const updateCount = async () => {
 };
 // updateCount();
 // setInterval(updateCount, 30000);
-
+let intervalId;
 app.post('/api/v1/res',async(req,res) => {
-   if(count === 0){
+   const status = req.body.status;
+   if(count === 0 && status === "start"){
       count++;
-      setInterval(updateCount,25000);
+      intervalId = setInterval(updateCount, 5000);
+      return res.status(200).json({data:"Started..."});
    }
+   else if(status === "stop"){
+      if (intervalId) {
+         clearInterval(intervalId);
+         intervalId = null;
+         count = 0; // Reset count if needed
+         return res.status(200).json("Stopped...");
+      } else {
+         return res.status(400).json("No interval to stop.");
+      }
+   }
+   res.status(400).json("Invalid status.");
 
 })
 
