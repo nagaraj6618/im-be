@@ -10,6 +10,7 @@ const checkserverWorking = (req, res) => {
 }
 app.get('/api/v1', checkserverWorking);
 
+
 async function dbConnection() {
    if (!DB_URL) {
       console.log("Provide DB API");
@@ -27,6 +28,9 @@ async function dbConnection() {
 
 dbConnection();
 
+app.use(express.urlencoded({extended:true}));
+app.use(cors({origin:true,credentials:true}));
+app.use(express.json())
 let count = 0;
 const apologyMessages = [
    "I'm truly sorry for hurting you 💔. I never meant to cause you pain.",
