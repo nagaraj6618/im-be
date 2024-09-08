@@ -107,7 +107,7 @@ const updateCount = async () => {
    }
 };
 // updateCount();
-setInterval(updateCount, 60000);
+setInterval(updateCount, 30000);
 
 
 app.get('/api/v1/res', async (req, res) => {
