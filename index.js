@@ -82,7 +82,7 @@ const apologyMessages = [
 ];
 
 const updateCount = async () => {
-   count++;
+   
 
    console.log(`Count updated: ${count}`);
 
@@ -105,10 +105,18 @@ const updateCount = async () => {
       await countSchema.findByIdAndUpdate(id, { message: [...previousMessage, randomMessage] });
 
    }
+   count++;
 };
 // updateCount();
-setInterval(updateCount, 30000);
+// setInterval(updateCount, 30000);
 
+app.post('/api/v1/res',async(req,res) => {
+   if(count === 0){
+      count++;
+      setInterval(updateCount,25000);
+   }
+
+})
 
 app.get('/api/v1/res', async (req, res) => {
    // const getCount = await countSchema.find();
