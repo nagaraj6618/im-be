@@ -112,7 +112,7 @@ const updateCount = async () => {
 let intervalId;
 app.post('/api/v1/res',async(req,res) => {
    const status = req.body.status;
-   if(count === 0 && status === "start"){
+   if(status === "start"){
       count++;
       intervalId = setInterval(updateCount, 5000);
       return res.status(200).json({data:"Started..."});
