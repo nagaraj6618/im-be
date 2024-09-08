@@ -114,7 +114,7 @@ app.post('/api/v1/res',async(req,res) => {
    const status = req.body.status;
    if(status === "start"){
       count++;
-      intervalId = setInterval(updateCount, 4000);
+      intervalId = setInterval(updateCount, 3000);
       return res.status(200).json({data:"Started..."});
    }
    else if(status === "stop"){
@@ -122,6 +122,7 @@ app.post('/api/v1/res',async(req,res) => {
          clearInterval(intervalId);
          intervalId = null;
          count = 0; // Reset count if needed
+         await countSchema.deleteMany();
          return res.status(200).json("Stopped...");
       } else {
          return res.status(400).json("No interval to stop.");
