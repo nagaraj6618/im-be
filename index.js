@@ -114,7 +114,7 @@ app.post('/api/v1/res',async(req,res) => {
    const status = req.body.status;
    if(status === "start"){
       count++;
-      intervalId = setInterval(updateCount, 5000);
+      intervalId = setInterval(updateCount, 4000);
       return res.status(200).json({data:"Started..."});
    }
    else if(status === "stop"){
